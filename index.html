@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>董小姐</title>
+    <script>
+        var showtime = function (str) {
+            var nowtime = new Date(),  //获取当前时间
+                endtime = new Date(str);  //定义结束时间
+            var lefttime = endtime.getTime() - nowtime.getTime(),  //距离结束时间的毫秒数
+                leftd = Math.floor(lefttime/(1000*60*60*24)),  //计算天数
+                lefth = Math.floor(lefttime/(1000*60*60)%24),  //计算小时数
+                leftm = Math.floor(lefttime/(1000*60)%60),  //计算分钟数
+                lefts = Math.floor(lefttime/1000%60);  //计算秒数
+				lefth = lefth < 10 ? '0' + lefth : lefth;
+				leftm = leftm < 10 ? '0' + leftm : leftm;
+				lefts = lefts < 10 ? '0' + lefts : lefts;
+				leftd = "<span class='time'>" + leftd + "</span>"
+				lefth = "<span class='time'>" + lefth + "</span>"
+				leftm = "<span class='time'>" + leftm + "</span>"
+				lefts = "<span class='time'>" + lefts + "</span>"
+            return leftd + " 天" + lefth + " 时 " + leftm + " 分 " + lefts + " 秒 ";  //返回倒计时的字符串
+        }
+    </script>
+    <style>
+		.time {
+			font-size: 2rem;
+		}
+		.avatar img {
+    width: 5rem;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 10px;
+}
+.avatar{
+text-align: center;
+}
+
+.center {
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background: rgba(0,0,0,.1);
+    padding: 1rem;
+    border-radius: 8%;
+    /* margin: 0 auto; */
+}
+
+body{
+width: 100%;
+    height: 100%;
+    background-image: url(bg.png);
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+html{
+width: 100%;
+    height: 100%;
+}
+.tip{
+margin:10px;}
+    </style>
+</head>
+
+<body style="width:100%;height:100%;background-image:url(bg.png);background-size:cover;">
+<div style="display:flex;justify-content:center;" class="center">
+<div class="avatar"><img src="avatar.png"></div>
+<div class="tip">距离考试时间还有：</div>
+<div id="showtime" style="display:inline-block;">
+</div>
+</div>
+<script>
+    var div = document.getElementById("showtime");
+	div.innerHTML = showtime("2021/11/13");
+    setInterval (function () {
+        div.innerHTML = showtime("2021/11/13");
+    }, 1000);  //反复执行函数本身
+</script>
+</body>
+</html>
